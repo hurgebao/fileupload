@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="off" monitorInterval="1800">
+	<Properties>
+		<Property name="fileDir">/home/www/logs/tomcat</Property>
+		<Property name="appName">gateway</Property>
+		<Property name="PATTERN">%d %-5p [%t] %C{1} (%F:%L) - %m%n</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy.MM.dd HH:mm:ss.SSS} %t %-5level %class{36}.%M()/%L  - %msg%xEx%n" />
+		</Console>
+
+		<RollingFile name="rollingFile" fileName="${fileDir}/${appName}.log"
+			filePattern="${fileDir}/${date:yyyy-MM}/${appName}-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout
+				pattern="%d{yyyy.MM.dd HH:mm:ss.SSS} %t %-5level %class{36}.%M()/%L - %msg%xEx%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50 MB" />
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<DefaultRolloverStrategy max="100" />
+		</RollingFile>
+		<RollingFile name="rollingFile-error" fileName="${fileDir}/${appName}-error.log"
+			filePattern="${fileDir}/${date:yyyy-MM}/${appName}-error-%d{yyyy-MM-dd}-%i.log.gz">
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>
+			<PatternLayout
+				pattern="%d{yyyy.MM.dd HH:mm:ss.SSS} %t %-5level %class{36}.%M()/%L - %msg%xEx%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50 MB" />
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<DefaultRolloverStrategy max="100" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.sinossc.stocktrade" level="info" additivity="false">
+			<appender-ref ref="console" />
+			<appender-ref ref="rollingFile" />
+			<appender-ref ref="rollingFile-error" />
+		</Logger>
+		<Root level="info">
+			<appender-ref ref="console" />
+			<appender-ref ref="rollingFile" />
+			<appender-ref ref="rollingFile-error" />
+		</Root>
+	</Loggers>
+</configuration>
