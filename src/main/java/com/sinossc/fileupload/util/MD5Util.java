@@ -1,4 +1,4 @@
-package com.sinossc.stocktrade.gateway.facade.util;
+package com.sinossc.fileupload.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

@@ -37,15 +37,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>*.js</url-pattern>
-    <url-pattern>*.css</url-pattern>
-    <url-pattern>*.jpg</url-pattern>
-    <url-pattern>*.png</url-pattern>
-    <url-pattern>/assets/*&quot;</url-pattern>
-    <url-pattern>/images/*</url-pattern>
-  </servlet-mapping>
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

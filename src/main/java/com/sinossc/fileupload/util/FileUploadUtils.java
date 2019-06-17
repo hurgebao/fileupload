@@ -1,4 +1,4 @@
-package com.sinossc.stocktrade.gateway.facade.util;
+package com.sinossc.fileupload.util;
 
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,11 +24,8 @@ public class FileUploadUtils {
         /** 判断创建路径 */
         //判断目录是否存在(音频存放根目录)
         File fileAudioRootDir =new File(appFilePath);
-        if(!fileAudioRootDir.isDirectory()){
-            fileAudioRootDir.mkdir();
-            fileAudioRootDir.setExecutable(true);
-            fileAudioRootDir.setWritable(true);
-            fileAudioRootDir.setReadable(true);
+        if(!fileAudioRootDir.exists()){
+        	fileAudioRootDir.mkdirs();
         }
         /** 上传图片 */
         if (files != null && files.size() > 0) {
@@ -73,11 +70,11 @@ public class FileUploadUtils {
 
     public static List<MultipartFile> getFiles(HttpServletRequest request, String paramName) {
         MultiValueMap<String, MultipartFile> multiValueMap = getAllMultipartFiles(request);
-        if (null != multiValueMap) {
+//        if (null != multiValueMap) {
             return (List)multiValueMap.get(paramName);
-        } else {
-            return null;
-        }
+//        } else {
+//            return null;
+//        }
     }
     public static MultiValueMap<String, MultipartFile> getAllMultipartFiles(HttpServletRequest request) {
         MultipartRequest multipartRequest = (MultipartRequest) WebUtils.getNativeRequest(request, MultipartRequest.class);
