@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.sinossc.fileupload.util.FileUploadUtils;
 import com.sinossc.stocktrade.common.utils.StringUtils;
 
@@ -37,26 +38,30 @@ public class UploadController {
      * */
     @ResponseBody
     @RequestMapping(value = "uploadFile")
-    public String uploadFile(HttpServletRequest request) {
+    public Map<String,String> uploadFile(HttpServletRequest request) {
+    	Map<String,String> map=new HashMap<>();
         try {
             // 获取参数
             Map<String, Object> params = new HashMap<String, Object>();
             String fileName = (String)request.getParameter("fileName"); //文件名称
             String a=request.getParameter("a");
             if(StringUtils.trim(a)==null){
-            	return "validate failed(0)";
+                map.put("result", "validate failed(00)");
+            	return map;
             }
             String [] aa=a.split("~");
             if(aa==null || aa.length<2){
-            	return "validate failed(1)";
+                map.put("result", "validate failed(11)");
+            	return map;
             }
             String model=aa[0];
             String user=aa[1];
 
             //上传视频
-            List<MultipartFile> fileLists = FileUploadUtils.getFiles(request, "filename");
+            List<MultipartFile> fileLists = FileUploadUtils.getFiles(request, "mf");
             if(fileLists==null || fileLists.size()<=0){
-            	return "unsupport image type";
+                map.put("result", "unsupport image type");
+             	return map;
             }
             //项目webapp根目录
             String webappRootPath = image_base_url+"/"+model+"/"+user;
@@ -64,12 +69,15 @@ public class UploadController {
             //上传文件
             String fNo = ""+System.currentTimeMillis();
             String fileNameSys = FileUploadUtils.uploadPicture(fileLists, fNo, webappRootPath);
-            logger.info("上传文件:"+fileNameSys);
+            map.put("result", "success");
+            map.put("filename", fileNameSys);
+            logger.info("上传文件成功:{}",JSON.toJSONString(map));
+            return map;
 
         } catch(Exception e) {
         	logger.error("上传文件异常{}",e);
-        	return "fail";
+            map.put("result", "fail");
+           	return map;
         }
-        return "success";
     }
 }

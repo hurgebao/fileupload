@@ -11,7 +11,7 @@
 </head>
 <body>
 	<form method="post" action="${ctx}/uploadFile?a=1~2~3" enctype="multipart/form-data">
-		<input type="file" name="filename" >
+		<input type="file" name="mf" >
 		<input type="submit" value="上传" />
 	</form>
 </body>

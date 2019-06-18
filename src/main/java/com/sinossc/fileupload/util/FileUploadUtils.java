@@ -1,18 +1,21 @@
 package com.sinossc.fileupload.util;
 
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
-public class FileUploadUtils {
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.util.WebUtils;
+
+public class FileUploadUtils {
+	private static Logger logger=LoggerFactory.getLogger(FileUploadUtils.class);
     /**
      * 方法说明：上传保存附件(图片)
      * 创建人：范兴乾
@@ -34,6 +37,7 @@ public class FileUploadUtils {
                 if(file.getSize() > 0) {
                     String zh_file_name = file.getOriginalFilename();
                     fileName = StringUtil.getSeqNoPk() + zh_file_name.substring(zh_file_name.lastIndexOf("."), zh_file_name.length());
+                    logger.info("原始文件名:{},自动生产的文件名:{}",zh_file_name,fileName);
                     //上传文件
                     uploadFile(file, appFilePath+"/"+fileName);
                 }
