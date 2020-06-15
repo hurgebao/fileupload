@@ -16,7 +16,7 @@
 		<servlet_version>3.1.0</servlet_version>
 		<redis_client_version>2.8.0</redis_client_version>
 		<javax_validation_version>1.0.0.GA</javax_validation_version>
-		<hibernate_validator_version>4.2.0.Final</hibernate_validator_version>
+		<hibernate_validator_version>5.3.5.Final</hibernate_validator_version>
 		<resteasy_jaxrs_version>3.0.7.Final</resteasy_jaxrs_version>
 		<resteasy_client_version>3.0.7.Final</resteasy_client_version>
 		<resteasy_netty_version>3.0.7.Final</resteasy_netty_version>
