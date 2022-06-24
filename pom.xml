@@ -18,7 +18,7 @@
 		<javax_validation_version>1.0.0.GA</javax_validation_version>
 		<hibernate_validator_version>4.2.0.Final</hibernate_validator_version>
 		<resteasy_jaxrs_version>3.0.7.Final</resteasy_jaxrs_version>
-		<resteasy_client_version>3.0.7.Final</resteasy_client_version>
+		<resteasy_client_version>3.14.0.Final</resteasy_client_version>
 		<resteasy_netty_version>3.0.7.Final</resteasy_netty_version>
 		<resteasy_jdk_http_version>3.0.7.Final</resteasy_jdk_http_version>
 		<resteasy_jackson_provider_version>3.0.7.Final</resteasy_jackson_provider_version>
